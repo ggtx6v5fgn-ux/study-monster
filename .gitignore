@@ -1,0 +1,65 @@
+# Виртуальное окружение
+venv/
+env/
+ENV/
+.venv/
+
+# База данных
+*.sqlite3
+*.db
+db.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Django
+*.log
+local_settings.py
+media/
+staticfiles/
+static_collected/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.directory
+
+# Загрузки
+uploads/
+downloads/
+
+# Переменные окружения
+.env
+.env.local
+.env.production
+
+# Временные файлы
+*.tmp
+*.bak
+*.orig

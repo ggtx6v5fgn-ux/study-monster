@@ -1,0 +1,19 @@
+[MASTER]
+load-plugins=pylint_django
+ignore=migrations
+
+[MESSAGES CONTROL]
+disable=C0114,  # missing-module-docstring
+        C0115,  # missing-class-docstring
+        C0116,  # missing-function-docstring
+        R0903,  # too-few-public-methods
+        R0913,  # too-many-arguments
+        W0613,  # unused-argument
+        E5110,  # игнор конфигурации джанго
+        E1101
+
+[DESIGN]
+max-parents=13
+
+[FORMAT]
+max-line-length=120

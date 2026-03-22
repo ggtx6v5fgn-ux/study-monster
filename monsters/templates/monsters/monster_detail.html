@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ monster.name }}{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+    <a href="{% url 'monster_list' %}" class="btn btn-outline-secondary">
+        ← Назад к списку
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h2>{{ monster.name }}</h2>
+    </div>
+    <div class="card-body">
+        <p><strong>Описание:</strong> {{ monster.description|default:"Нет описания" }}</p>
+        <p><strong>Здоровье (HP):</strong> {{ monster.hp }}</p>
+        <p><strong>Сложность:</strong> {{ monster.get_difficulty_display }}</p>
+        <p><strong>Дата создания:</strong> {{ monster.created_at|date:"d.m.Y H:i" }}</p>
+        <p><strong>Тип:</strong> {{ monster.get_monster_type_display }}</p>
+        <p><strong>Дедлайн:</strong> {{ monster.deadline|date:"d.m.Y H:i"|default:"Не указан" }}</p>
+        <div class="mt-3 mb-3">
+            <a href="{% url 'monster_update' monster.pk %}" class="btn btn-primary">✏️ Редактировать</a>
+            <a href="{% url 'monster_delete' monster.pk %}" class="btn btn-danger">🗑️ Удалить</a>
+        </div>
+        {% if not monster.defeated %}
+            <div class="mt-3 mb-3">
+            <a href="{% url 'battle_monster' monster.pk %}" class="btn btn-danger btn-lg">⚔️ Атаковать монстра</a>
+            </div>
+        {% else %}
+            <div class="alert alert-success mt-3"><h4>✅ Монстр побеждён!</h4>
+            <p>Дата победы: {{ monster.defeated_at|date:"d.m.Y H:i" }}</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="progress mb-3">
+    <div class="progress-bar {% if monster.defeated %}bg-success{% else %}bg-danger{% endif %}" 
+         role="progressbar" 
+         style="width: {{ monster.hp }}%">
+        {{ monster.hp }} HP
+    </div>
+</div>
+{% endblock %}

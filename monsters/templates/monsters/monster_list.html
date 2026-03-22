@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Список монстров{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>🧟‍♂️ Мои монстры</h1>
+    <a href="{% url 'monster_create' %}" class="btn btn-primary">
+        + Создать монстра
+    </a>
+</div>
+
+<div class="row">
+    {% for monster in monsters %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'monster_detail' monster.pk %}">{{ monster.name }}</a>
+                    </h5>
+                    <p class="card-text">{{ monster.description|truncatechars:50 }}</p>
+                    <p class="card-text">
+                        <strong>Тип:</strong> {{ monster.get_monster_type_display }}<br>
+                        <strong>HP:</strong> {{ monster.hp }}<br>
+                        <div class="mt-2">
+                            <a href="{% url 'monster_update' monster.pk %}" class="btn btn-sm btn-outline-primary">✏️</a>
+                            <a href="{% url 'monster_delete' monster.pk %}" class="btn btn-sm btn-outline-danger">🗑️</a>
+                        </div>
+                        <strong>Сложность:</strong> {{ monster.get_difficulty_display }}
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">Дедлайн: {{ monster.deadline|date:"d.m.Y H:i"|default:"Не указан" }}</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                Пока нет монстров. Создай первого в админке!
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
